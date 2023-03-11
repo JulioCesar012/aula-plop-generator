@@ -1,5 +1,3 @@
 export const Banner = () => {
-    return (
-        <div>Componente Banner </div>
-    )
-}
+  return <div>Componente Banner </div>;
+};

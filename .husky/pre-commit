@@ -1,0 +1,42 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+echo '🏗️👷 Estilizando, testando e construindo seu projeto antes de comitar'
+
+# Check Prettier standards
+npm run check-format ||
+(
+    echo '🤢🤮🤢🤮 Seu estilo parece quebrado 🤢🤮🤢🤮
+            Falha na verificação do Prettier. Execute o yarn format para formatar o arquivo e adicione as alterações no git com o git add . e tente confirmar novamente.';
+    false;
+)
+
+# Check ESLint Standards
+npm run check-lint ||
+(
+        echo '😤🏀👋😤 Tire essa coisa fraca daqui! 😤🏀👋😤 
+                Falha na verificação do ESLint. Faça as alterações necessárias listadas acima, adicione as alterações e tente confirmar novamente.'
+        false; 
+)
+
+# Check tsconfig standards
+npm run check-types ||
+(
+    echo '🤡😂❌🤡 Falha na verificação de Type. 🤡😂❌🤡
+            Você está seriamente tentando escrever isso? Faça as alterações necessárias acima.'
+    false;
+)
+
+# If everything passes... Now we can commit
+echo '🤔🤔🤔🤔... Tudo bem... O código parece bom para mim... Tentando construir agora. 🤔🤔🤔🤔'
+
+npm run build ||
+(
+    echo '❌👷🔨❌ Melhor falar com alguém do time... Porque sua compilação falhou ❌👷🔨❌
+            Falha na próxima compilação: veja os erros acima para ver o por que; 
+    '
+    false;
+)
+
+# If everything passes... Now we can commit
+echo '✅✅✅✅ O teste passou... comitado com ✅✅✅✅ ... sucesso! ✅✅✅✅'

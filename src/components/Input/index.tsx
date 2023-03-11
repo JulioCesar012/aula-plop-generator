@@ -1,5 +1,3 @@
 export const Input = () => {
-    return (
-        <div>Componente Input </div>
-    )
-}
+  return <div>Componente Input </div>;
+};
