@@ -94,7 +94,6 @@ module.exports = (plop) => {
       },
     ],
     actions: (data) => {
-      const patternImport = /\/\/ Import component here\n/g;
       const path = "src/components/{{ pascalCase name }}/index.tsx";
       const pathExport = "src/components/index.ts";
       const pageTemplate = "__templates__/components/component_index.js.hbs";
